@@ -1,0 +1,27 @@
+.react-tel-input .flag-dropdown {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  border-radius: 0.375rem !important;
+  padding: 0 0.5rem;
+}
+
+.react-tel-input .selected-flag {
+  background-color: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+}
+
+.react-tel-input .flag {
+  transform: scale(1.1);
+}
+
+.react-tel-input .arrow {
+  border-top: 4px solid white !important;
+}
+
+.react-tel-input .country-list {
+  background-color: white !important;
+  color: black !important;
+  border-radius: 0.5rem;
+  box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.2);
+}
