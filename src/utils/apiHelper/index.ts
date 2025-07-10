@@ -18,7 +18,7 @@ api.interceptors.response.use(
     (response) => response,
     (error) => {
         const message = error?.response?.data?.message || error.message || 'Something went wrong';
-        console.log('meesage is', error)
+        console.log('message is', error)
         toast.error(message);
         return Promise.reject(error);
     }

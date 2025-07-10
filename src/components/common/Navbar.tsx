@@ -7,6 +7,11 @@ import {
     PlusCircle,
     User,
     Settings,
+    Activity,
+    CalendarCheck,
+    Wallet,
+    BarChart2,
+    Heart,
 } from 'lucide-react';
 import React, { useEffect, useState, useRef, JSX } from 'react';
 import Link from 'next/link';
@@ -25,16 +30,19 @@ const Navbar = () => {
             { label: 'Profile', icon: <User size={20} />, href: '/profile' },
         ],
         artist: [
-            { label: 'Feed', icon: <Home size={20} />, href: '/feed' },
+            { label: 'Home', icon: <Home size={20} />, href: '/' },
+            { label: 'Feed', icon: <Activity size={20} />, href: '/access/feed' },
             { label: 'My Events', icon: <Ticket size={20} />, href: '/my-events' },
-            { label: 'Create', icon: <PlusCircle size={24} />, href: '/create' },
+            { label: 'Earnings', icon: <Wallet size={20} />, href: '/earnings' },
+            { label: 'Analytics', icon: <BarChart2 size={20} />, href: '/analytics' },
+            { label: 'Saved Events', icon: <Heart size={20} />, href: '/saved' },
             { label: 'Profile', icon: <User size={20} />, href: '/profile' },
         ],
         organizer: [
-            { label: 'Dashboard', icon: <Home size={20} />, href: '/dashboard' },
-            { label: 'Create Event', icon: <PlusCircle size={24} />, href: '/create-event' },
-            { label: 'My Events', icon: <Ticket size={20} />, href: '/my-events' },
-            { label: 'Settings', icon: <Settings size={20} />, href: '/settings' },
+            { label: 'Dashboard', icon: <Home size={20} />, href: '/organizer/dashboard' },
+            { label: 'Create Event', icon: <PlusCircle size={24} />, href: '/organizer/create-event' },
+            { label: 'My Events', icon: <Ticket size={20} />, href: '/organizer/my-events' },
+            { label: 'Settings', icon: <Settings size={20} />, href: '/organizer/settings' },
         ],
         vendor: [
             { label: 'Shop', icon: <Store size={20} />, href: '/shop' },
@@ -86,8 +94,8 @@ const Navbar = () => {
         <header
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
-            className={`bg-[#1E1E2F]/95 backdrop-blur-sm z-50 max-w-md mx-auto fixed bottom-3 w-[95%] left-1/2 -translate-x-1/2 
-      px-4 py-2 rounded-xl shadow-lg flex items-center justify-between text-white border border-white/10 
+            className={`bg-[#1E1E2F]/95 backdrop-blur-sm z-50  mx-auto fixed bottom-3 max-w-3xl left-1/2 -translate-x-1/2 
+      px-6 py-2 rounded-xl shadow-lg flex items-center justify-between gap-10 text-white border border-white/10 
       transition-all duration-500 ${isVisible ? 'translate-y-0' : ' translate-y-16 pointer-events-none'}`}
         >
             {navItems.map((item) => (
