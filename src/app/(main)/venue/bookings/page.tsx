@@ -1,15 +1,15 @@
 'use client'
 import EventRequestAction from "@/components/common/events/EventReqAction";
-import Spinner from "@/components/common/Spinner";
 import useScroll from "@/hooks/useScroll";
 import { PageInfo, RequestInterface } from "@/lib/interfaces/venue_owner/venueRequest.interface";
 import { apiRequest } from "@/utils/apiHelper";
-import { Calendar, Check, Clock, FileText, Users, X } from "lucide-react";
+import { Calendar, Clock, FileText, Users } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
 const Bookings = () => {
     const [page, setPage] = useState(1);
+    const [refetchTrigger, setRefetchTrigger] = useState(false);
     const [states, setStates] = useState<{
         pageInfo: PageInfo; data: RequestInterface[];
     }>({
@@ -40,7 +40,7 @@ const Bookings = () => {
 
     useEffect(() => {
         fetchEvents()
-    }, [page])
+    }, [page, refetchTrigger])
 
     const loadRef = useScroll({
         hasMore,
@@ -54,7 +54,7 @@ const Bookings = () => {
             <div className="max-w-7xl mx-auto">
                 {/* Enhanced Header */}
                 <div className="mb-12 text-center">
-                    <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full mb-6">
+                    <div className="inline-flex items-center justify-center w-16 h-16 bg-background-secondary rounded-full mb-6">
                         <Calendar className="w-8 h-8 text-white" />
                     </div>
                     <h1 className="text-4xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent mb-4">
@@ -173,7 +173,10 @@ const Bookings = () => {
                                     </div>
 
                                     {/* Enhanced Actions */}
-                                    <EventRequestAction />
+                                    <EventRequestAction
+                                        eventId={event.id}
+                                        onActionComplete={() => setRefetchTrigger(prev => !prev)}
+                                    />
                                 </div>
                             </div>
                         </div>
@@ -194,6 +197,7 @@ const Bookings = () => {
                     </div>
                 )}
             </div>
+            <div ref={loadRef} />
         </section>
     );
 };

@@ -1,7 +1,7 @@
 
 import React from 'react';
 import Posts from './Posts';
-import { apiCall } from '@/app/callApi';
+import { apiCall } from '@/app/callApi.server';
 import { PostsListInterface } from '@/lib/interfaces/posts/postList.interface';
 
 const Feed = async () => {

@@ -1,4 +1,1 @@
-module= posts, common page, venue , organizer
-features= detail pages, listing pages, button actions
-description= created post listing page , like action , artist detail page follow , unfollow action, organizer req for vneue
-author= Rahul Prajapat, JULY 10, 18:11
+module 

@@ -1,5 +1,5 @@
 export const dynamic = 'force-dynamic';
-import { apiCall, Base_Url } from "@/app/callApi";
+import { apiCall, Base_Url } from "@/app/callApi.server";
 import ProfileAction from "@/components/common/artist/profile/ProfileAction";
 import { ArtistInfoInterface } from "@/lib/interfaces/artist/artistInfo.interface";
 import Image from "next/image";

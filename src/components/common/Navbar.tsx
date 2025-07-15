@@ -8,7 +8,6 @@ import {
     User,
     Settings,
     Activity,
-    CalendarCheck,
     Wallet,
     BarChart2,
     Heart,
@@ -17,7 +16,7 @@ import React, { useEffect, useState, useRef, JSX } from 'react';
 import Link from 'next/link';
 
 const Navbar = () => {
-    const userType = 'venue_owner';
+    const userType = 'artist';
 
     const navItemsByRole: Record<
         string,
@@ -32,7 +31,7 @@ const Navbar = () => {
         artist: [
             { label: 'Home', icon: <Home size={20} />, href: '/' },
             { label: 'Feed', icon: <Activity size={20} />, href: '/access/feed' },
-            { label: 'My Events', icon: <Ticket size={20} />, href: '/my-events' },
+            { label: 'My Events', icon: <Ticket size={20} />, href: '/artist/my-events' },
             { label: 'Earnings', icon: <Wallet size={20} />, href: '/earnings' },
             { label: 'Analytics', icon: <BarChart2 size={20} />, href: '/analytics' },
             { label: 'Saved Events', icon: <Heart size={20} />, href: '/saved' },

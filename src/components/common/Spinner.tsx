@@ -1,8 +1,17 @@
-const Spinner = ({ color = '#fff' }: { color?: string }) => {
+interface SpinnerProps {
+    color?: string
+    size?: string
+}
+
+const Spinner = ({ color = '#fff', size = "20px" }: SpinnerProps) => {
     return (
         <div
-            className={`w-5 h-5 border-2 border-gray-300 rounded-full animate-spin`}
-            style={{ borderTopColor: color }}
+            className={`border-2 border-gray-300 rounded-full animate-spin`}
+            style={{
+                borderTopColor: color,
+                width: size,
+                height: size
+            }}
         />
     )
 }

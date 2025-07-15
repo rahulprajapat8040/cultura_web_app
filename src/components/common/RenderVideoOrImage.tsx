@@ -1,5 +1,4 @@
 
-import { Base_Url } from '@/app/callApi';
 import Image from 'next/image';
 import React from 'react';
 
@@ -8,7 +7,7 @@ const RenderVideoOrImage = ({ mediaUrl, mediaType }: { mediaUrl: string, mediaTy
     if (mediaType.startsWith("image/")) {
         return (
             <Image
-                src={`${Base_Url}/${mediaUrl}`}
+                src={`${process.env.NEXT_PUBLIC_BASE_URL}/${mediaUrl}`}
                 alt={'media'}
                 fill
                 className="object-cover"
@@ -19,7 +18,7 @@ const RenderVideoOrImage = ({ mediaUrl, mediaType }: { mediaUrl: string, mediaTy
     if (mediaType.startsWith("video/")) {
         return (
             <video
-                src={`${Base_Url}/${mediaUrl}`}
+                src={`${process.env.NEXT_PUBLIC_BASE_URL}/${mediaUrl}`}
                 controls
                 loop
                 className="w-full h-auto rounded-xl object-cover"

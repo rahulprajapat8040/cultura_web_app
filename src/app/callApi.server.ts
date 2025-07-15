@@ -1,4 +1,3 @@
-// utils/api.ts
 
 import { cookies } from "next/headers";
 import { NextRequest } from "next/server";

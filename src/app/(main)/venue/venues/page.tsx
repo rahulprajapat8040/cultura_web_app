@@ -1,6 +1,6 @@
 import React from 'react';
 import { MapPin, Calendar, Star, ArrowRight, DollarSign } from 'lucide-react';
-import { apiCall } from '@/app/callApi';
+import { apiCall } from '@/app/callApi.server';
 import { VenueListInterface } from '@/lib/interfaces/venue_owner/allVenueList.interface';
 import RenderVideoOrImage from '@/components/common/RenderVideoOrImage';
 
