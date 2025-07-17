@@ -1,0 +1,4 @@
+module: New Ui
+features: The ui and complete system updated for the cutura , Name will update soon
+description: As for previous system there were no design , now found a design on figma community and working on it.
+author: Rahu Prajapat, JULY 17, 11:24 am

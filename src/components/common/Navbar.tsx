@@ -1,114 +1,81 @@
-'use client';
-
-import {
-    Home,
-    Ticket,
-    Store,
-    PlusCircle,
-    User,
-    Settings,
-    Activity,
-    Wallet,
-    BarChart2,
-    Heart,
-} from 'lucide-react';
-import React, { useEffect, useState, useRef, JSX } from 'react';
-import Link from 'next/link';
+'use client'
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const Navbar = () => {
-    const userType = 'artist';
+    const pathName = usePathname()
 
-    const navItemsByRole: Record<
-        string,
-        { label: string; icon: JSX.Element; href: string }[]
-    > = {
-        user: [
-            { label: 'Home', icon: <Home size={20} />, href: '/' },
-            { label: 'Events', icon: <Ticket size={20} />, href: '/events' },
-            { label: 'Marketplace', icon: <Store size={20} />, href: '/marketplace' },
-            { label: 'Profile', icon: <User size={20} />, href: '/profile' },
-        ],
-        artist: [
-            { label: 'Home', icon: <Home size={20} />, href: '/' },
-            { label: 'Feed', icon: <Activity size={20} />, href: '/access/feed' },
-            { label: 'My Events', icon: <Ticket size={20} />, href: '/artist/my-events' },
-            { label: 'Earnings', icon: <Wallet size={20} />, href: '/earnings' },
-            { label: 'Analytics', icon: <BarChart2 size={20} />, href: '/analytics' },
-            { label: 'Saved Events', icon: <Heart size={20} />, href: '/saved' },
-            { label: 'Profile', icon: <User size={20} />, href: '/profile' },
-        ],
-        organizer: [
-            { label: 'Dashboard', icon: <Home size={20} />, href: '/organizer/dashboard' },
-            { label: 'Create Event', icon: <PlusCircle size={24} />, href: '/organizer/create-event' },
-            { label: 'My Events', icon: <Ticket size={20} />, href: '/organizer/my-events' },
-            { label: 'Settings', icon: <Settings size={20} />, href: '/organizer/settings' },
-        ],
-        vendor: [
-            { label: 'Shop', icon: <Store size={20} />, href: '/shop' },
-            { label: 'Orders', icon: <Ticket size={20} />, href: '/orders' },
-            { label: 'Add Product', icon: <PlusCircle size={24} />, href: '/add-product' },
-            { label: 'Profile', icon: <User size={20} />, href: '/profile' },
-        ],
-        venue_owner: [
-            { label: 'Venues', icon: <Home size={20} />, href: '/venue/venues' },
-            { label: 'Add Venue', icon: <PlusCircle size={24} />, href: '/venue/add-venue' },
-            { label: 'Bookings', icon: <Ticket size={20} />, href: '/venue/bookings' },
-            { label: 'Profile', icon: <User size={20} />, href: '/profile' },
-        ],
-    };
-
-    const navItems = navItemsByRole[userType] || [];
-
-    const [isVisible, setIsVisible] = useState(true);
-    const lastScrollY = useRef(0);
-    const timeoutRef = useRef<NodeJS.Timeout | null>(null);
-
-    useEffect(() => {
-        const handleScroll = () => {
-            const currentScrollY = window.scrollY;
-
-            if (currentScrollY > lastScrollY.current && currentScrollY > 60) {
-                setIsVisible(false); // Scroll down → hide
-            } else {
-                setIsVisible(true); // Scroll up → show
-            }
-
-            lastScrollY.current = currentScrollY;
-        };
-
-        window.addEventListener('scroll', handleScroll, { passive: true });
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
-
-    const handleMouseEnter = () => {
-        if (timeoutRef.current) clearTimeout(timeoutRef.current);
-        setIsVisible(true);
-    };
-
-    const handleMouseLeave = () => {
-        timeoutRef.current = setTimeout(() => setIsVisible(false), 2000);
-    };
-
+    const navLinks = [
+        {
+            name: 'Home',
+            url: '/'
+        },
+        {
+            name: 'Events',
+            url: '/events'
+        },
+        {
+            name: 'About',
+            url: '/about',
+        },
+        {
+            name: 'Contact',
+            url: '/contact'
+        }
+    ]
     return (
-        <header
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-            className={`bg-[#1E1E2F]/95 backdrop-blur-sm z-50  mx-auto fixed bottom-3 max-w-3xl left-1/2 -translate-x-1/2 
-      px-6 py-2 rounded-xl shadow-lg flex items-center justify-between gap-10 text-white border border-white/10 
-      transition-all duration-500 ${isVisible ? 'translate-y-0' : ' translate-y-16 pointer-events-none'}`}
-        >
-            {navItems.map((item) => (
-                <Link
-                    key={item.href}
-                    href={item.href}
-                    className="flex flex-col items-center text-xs hover:text-yellow-400 transition-all"
-                >
-                    {item.icon}
-                    <span className="mt-1">{item.label}</span>
-                </Link>
-            ))}
+        <header className="bg-dark-blue-gray text-background w-full h-14 flex items-center">
+            <div className="max-w-7xl h-full mx-auto w-full flex items-center justify-between">
+                <div>
+                    <Image
+                        src={'/assets/Logo.svg'}
+                        alt="Logo"
+                        width={130}
+                        height={80}
+                    />
+                </div>
+                <div className="h-full">
+                    <nav className="h-full">
+                        <div className="h-full">
+                            <ul className="flex items-center gap-9 font-medium h-full">
+                                {
+                                    navLinks.map((item, idx) => {
+                                        return (
+                                            <li
+                                                key={idx}
+                                                className="h-full"
+                                            >
+                                                <Link
+                                                    href={item.url}
+                                                    className={`h-full flex items-center ${pathName === item.url ? 'border-b-3 border-yellow' : ''}`}>
+                                                    {item.name}
+                                                </Link>
+                                            </li>
+                                        )
+                                    })
+                                }
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+                <div>
+                    <ul className="flex items-center gap-4 font-medium h-full">
+                        <li>Create Event</li>
+                        <li>Login</li>
+                        <li>
+                            <Link
+                                href={'/signup'}
+                                className="bg-yellow py-2 px-4 rounded-md text-dark-blue-gray"
+                            >
+                                Sign Up
+                            </Link>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </header>
-    );
-};
+    )
+}
 
 export default Navbar;
