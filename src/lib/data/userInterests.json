@@ -1,0 +1,101 @@
+[
+    {
+        "key": "music",
+        "value": [
+            "concerts",
+            "music festivals",
+            "music workshops",
+            "dj nights"
+        ]
+    },
+    {
+        "key": "arts & culture",
+        "value": [
+            "art exhibitions",
+            "cultural festivals",
+            "theater plays",
+            "dance performances"
+        ]
+    },
+    {
+        "key": "food & drink",
+        "value": [
+            "food festival",
+            "wine tastings",
+            "cooking classes",
+            "beer festivals"
+        ]
+    },
+    {
+        "key": "sports & fitness",
+        "value": [
+            "marathons",
+            "yoga sessions",
+            "fitness workshops",
+            "sporting events"
+        ]
+    },
+    {
+        "key": "business & networking",
+        "value": [
+            "conferences",
+            "seminars",
+            "workshops",
+            "networking events"
+        ]
+    },
+    {
+        "key": "family & kids",
+        "value": [
+            "family-friendly events",
+            "children's workshops",
+            "kid-friendly shows",
+            "education activities"
+        ]
+    },
+    {
+        "key": "technology",
+        "value": [
+            "tech conferences",
+            "hackathons",
+            "startup events",
+            "gadget expos"
+        ]
+    },
+    {
+        "key": "comedy & entertainment",
+        "value": [
+            "stan-up comedy",
+            "improv nights",
+            "comedy festivals",
+            "magic shows"
+        ]
+    },
+    {
+        "key": "charity & causes",
+        "value": [
+            "fundraising events",
+            "charity galas",
+            "benefit concerts",
+            "auctions & fundraisers"
+        ]
+    },
+    {
+        "key": "education & learning",
+        "value": [
+            "lecture & talks",
+            "workshops",
+            "educations seminars",
+            "skill-building sessions"
+        ]
+    },
+    {
+        "key": "travel & adventures",
+        "value": [
+            "city tours",
+            "adventure travel",
+            "cultural experiences",
+            "cruise vacations"
+        ]
+    }
+]
