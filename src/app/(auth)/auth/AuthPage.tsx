@@ -1,8 +1,14 @@
 import { FacebookIcon, GoogleIcon } from "@/components/icons/Icon";
 import Image from "next/image";
-import Link from "next/link";
+import Login from "./login";
+import Signup from "./signup";
 
-const AuthPage = ({ authType }: { authType: string | null }) => {
+interface AuthPageProps {
+    authType: string | null
+    fallback: string | null
+}
+
+const AuthPage = ({ authType, fallback }: AuthPageProps) => {
     const isLogin = authType === 'login'
     return (
         <section className="w-full h-screen bg-dark-blue-gray text-background">
@@ -52,87 +58,9 @@ const AuthPage = ({ authType }: { authType: string | null }) => {
                     <div className="text-light-gray space-y-6">
                         {
                             isLogin ? (
-                                <>
-                                    <div className="grid grid-cols-1 space-y-2">
-                                        <label htmlFor="fullName"
-                                            className="font-medium"
-                                        >
-                                            E-mail Address
-                                        </label>
-                                        <input
-                                            type="text"
-                                            placeholder="Enter your e-mail."
-                                            className="outline-none rounded-md border p-3 border-light-gray"
-                                        />
-                                    </div>
-                                    <div className="grid grid-cols-1 space-y-2">
-                                        <label htmlFor="fullName" className="font-medium">Password</label>
-                                        <input
-                                            type="text"
-                                            placeholder="Enter password."
-                                            className="outline-none rounded-md border p-3 border-light-gray"
-                                        />
-                                    </div>
-                                    <div>
-                                        <button className="text-center w-full bg-dark-blue-gray text-background py-4 rounded-md text-lg font-semibold mt-4">
-                                            Login
-                                        </button>
-                                    </div>
-                                    <div className="flex items-center gap-3">
-                                        <p>Don’t have an account?</p>
-                                        <Link
-                                            href={'/auth'}
-                                            className="text-dark-blue-gray font-medium"
-                                        >
-                                            Signup
-                                        </Link>
-                                    </div>
-                                </>
+                                <Login fallback={fallback} />
                             ) : (
-                                <>
-                                    <div className="grid grid-cols-1 space-y-2">
-                                        <label htmlFor="fullName" className="font-medium">Full Name</label>
-                                        <input
-                                            type="text"
-                                            placeholder="Enter your full name."
-                                            className="outline-none rounded-md border p-3 border-light-gray"
-                                        />
-                                    </div>
-                                    <div className="grid grid-cols-1 space-y-2">
-                                        <label htmlFor="fullName"
-                                            className="font-medium"
-                                        >
-                                            E-mail Address
-                                        </label>
-                                        <input
-                                            type="text"
-                                            placeholder="Enter your e-mail."
-                                            className="outline-none rounded-md border p-3 border-light-gray"
-                                        />
-                                    </div>
-                                    <div className="grid grid-cols-1 space-y-2">
-                                        <label htmlFor="fullName" className="font-medium">Password</label>
-                                        <input
-                                            type="text"
-                                            placeholder="Enter password."
-                                            className="outline-none rounded-md border p-3 border-light-gray"
-                                        />
-                                    </div>
-                                    <div>
-                                        <button className="text-center w-full bg-dark-blue-gray text-background py-4 rounded-md text-lg font-semibold mt-4">
-                                            Create Account
-                                        </button>
-                                    </div>
-                                    <div className="flex items-center gap-3">
-                                        <p>Already have an account?</p>
-                                        <Link
-                                            href={'/auth?authType=login'}
-                                            className="text-dark-blue-gray font-medium"
-                                        >
-                                            Log In
-                                        </Link>
-                                    </div>
-                                </>
+                                <Signup fallback={fallback} />
                             )
                         }
                     </div>
