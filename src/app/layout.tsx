@@ -4,6 +4,9 @@ import "./globals.css";
 import Footer from "@/components/common/Footer";
 import ScrollWrapper from "@/components/common/ScrollWrapper";
 import Navbar from "@/components/common/Navbar";
+import ReduxProvider from "./providers/ReducProvider";
+import AuthInit from "@/components/common/AuthInit";
+import { Toaster } from "react-hot-toast";
 
 const poppins = Poppins({
   weight: ['100', "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -25,9 +28,13 @@ export default function RootLayout({
       <body
         className={`${poppins.className}antialiased`}
       >
-        <ScrollWrapper>
-          {children}
-        </ScrollWrapper>
+        <ReduxProvider>
+          <AuthInit />
+          <Toaster />
+          <ScrollWrapper>
+            {children}
+          </ScrollWrapper>
+        </ReduxProvider>
       </body>
     </html>
   );

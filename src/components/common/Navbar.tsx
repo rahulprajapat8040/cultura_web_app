@@ -1,9 +1,14 @@
 'use client'
+import { RootState } from "@/lib/redux/Store";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useSelector } from "react-redux";
+import { ProfileIcon, StarUnFilledIcon, TicketIconUnFill } from "../icons/Icon";
+import { User, UserCircle2 } from "lucide-react";
 
 const Navbar = () => {
+    const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn)
     const pathName = usePathname()
 
     const navLinks = [
@@ -61,16 +66,55 @@ const Navbar = () => {
                 </div>
                 <div>
                     <ul className="flex items-center gap-4 font-medium h-full">
-                        <li>Create Event</li>
-                        <li>Login</li>
                         <li>
-                            <Link
-                                href={'/signup'}
-                                className="bg-yellow py-2 px-4 rounded-md text-dark-blue-gray"
-                            >
-                                Sign Up
+                            <Link href={isLoggedIn ? '/create-event' : '/auth?fallback=/create-event'}>
+                                Create Event
                             </Link>
                         </li>
+                        {
+                            isLoggedIn ? (
+                                <>
+                                    <li>
+                                        <div className="flex flex-col items-center">
+                                            <TicketIconUnFill />
+                                            Ticket
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div className="flex flex-col items-center">
+                                            <StarUnFilledIcon size={30} />
+                                            Interested
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div className="flex flex-col items-center">
+                                            <UserCircle2 size={30} />
+                                            Profile
+                                        </div>
+                                    </li>
+                                </>
+                            )
+                                :
+                                (
+                                    <>
+                                        <li>
+                                            <Link
+                                                href={'/auth?authType=login'}
+                                            >
+                                                Login
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link
+                                                href={'/auth?fallback=/create-event'}
+                                                className="bg-yellow py-2 px-4 rounded-md text-dark-blue-gray"
+                                            >
+                                                Sign Up
+                                            </Link>
+                                        </li>
+                                    </>
+                                )
+                        }
                     </ul>
                 </div>
             </div>
