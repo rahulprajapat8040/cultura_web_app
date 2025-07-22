@@ -8,6 +8,7 @@
   --darkGray: #5a5a5a;
   --lightGray: #6f6f6f;
   --darkBlueGray: #2d2c3c;
+  --danger: #d6111a;
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
@@ -49,6 +50,7 @@
   --color-light-gray: var(--lightGray);
   --color-dark-blue-gray: var(--darkBlueGray);
   --color-foreground: var(--foreground);
+  --color-danger: var(--danger);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --color-sidebar-ring: var(--sidebar-ring);

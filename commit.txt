@@ -1,4 +1,4 @@
-module: Auth flow, apis
-features: Auth flow for login & signup, auth based navbar
-description: If user not login showing the button on navbar for login or signup if exist showing option according to it, Auth flow completed
-author: Rahu Prajapat, JULY 17, 11:24 am
+module: create event page
+features: created create event page added api
+description: created create event page
+author: Rahu Prajapat, JULY 22, 11:26 am

@@ -118,7 +118,7 @@ const Signup = ({ fallback }: SignupProp) => {
                     <div className="flex items-center gap-3 mt-4">
                         <p>Already have an account?</p>
                         <Link
-                            href={'/auth?authType=login'}
+                            href={`/auth?authType=login&fallback=${fallback ? fallback : ''}`}
                             className="text-dark-blue-gray font-medium"
                         >
                             Log In

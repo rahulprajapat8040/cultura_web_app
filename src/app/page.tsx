@@ -1,8 +1,14 @@
 import EventSearchInput from "@/components/common/EventSearchInput";
 import SeeMoreBtn from "@/components/common/SeeMoreBtn";
 import { ArrowRightIcon, StarFilledIcon, TicketIcon } from "@/components/icons/Icon";
+import { apiCall } from "./apiCall";
+import { HomeDataInterface } from "@/lib/interfaces/HomeData.interface";
+import Image from "next/image";
+import { Helper } from "@/utils/helper/helper";
 
-const Home = () => {
+const Home = async () => {
+  const Base_Url = `${process.env.NEXT_PUBLIC_BASE_URL}`
+  const res: HomeDataInterface = await apiCall(`${process.env.NEXT_PUBLIC_FETCH_HOME_DATA}`)
   const categories = [
     "entertainment",
     "educational & business",
@@ -96,15 +102,22 @@ const Home = () => {
           <div>
             <ul className="flex mt-5 py-3 items-center justify-between">
               {
-                categories.map((item, idx) => {
+                res.categories.map((item, idx) => {
                   return (
                     <li
                       className="flex flex-col items-center justify-center gap-2"
                       key={idx}
                     >
                       <div className="w-22 h-22 rounded-full bg-dark-gray">
+                        <Image
+                          src={`${Base_Url}/${item.image}`}
+                          alt={item.name}
+                          width={1000}
+                          height={1000}
+                          className="w-full h-full rounded-full object-cover"
+                        />
                       </div>
-                      <span className="font-medium capitalize">{item}</span>
+                      <span className="font-medium capitalize">{item.name}</span>
                     </li>
                   )
                 })
@@ -139,35 +152,36 @@ const Home = () => {
           <div>
             <ul className="grid grid-cols-3 gap-10 mt-5 py-3">
               {
-                popularEvents.map((item, idx) => {
+                res.locationEvents.map((item, idx) => {
+                  const date = Helper.getMonthAndDates(item.startDate, item.endDate)
                   return (
                     <li
                       className="flex flex-col items-center justify-center gap-2"
                       key={idx}
                     >
                       <div className="w-full h-64 bg-dark-gray relative rounded-t-lg">
-                        <div className="absolute bg-yellow px-3 py-1 text-dark-blue-gray font-semibold bottom-0 rounded-tr-md">
-                          {item.category}
+                        <div className="absolute capitalize bg-yellow px-3 py-1 text-dark-blue-gray font-semibold bottom-0 rounded-tr-md">
+                          {item.category.name}
                         </div>
                       </div>
                       <div className="flex justify-between w-full gap-3">
                         <div>
                           <h5 className="text-[#4539B4] text-3xl font-medium">
-                            {item.date.month}
+                            {date.month}
                           </h5>
                           <h5 className="font-bold">
-                            {item.date.day}
+                            {date.date}
                           </h5>
                         </div>
-                        <div className="w-full space-y-0.5">
-                          <h3 className="font-medium text-lg">{item.name}</h3>
+                        <div className="w-full space-y-0.5 ">
+                          <h3 className="font-medium text-lg line-clamp-1">{item.title}</h3>
                           <p className="line-clamp-1">{item.description}</p>
                           <span>
-                            {item.time}
+                            {item.startTime}
                           </span>
                           <div className="flex items-center gap-3">
-                            <h6 className="flex items-center gap-1 text-lg font-medium text-dark-gray"> <TicketIcon /> {item.ticket}</h6>
-                            <h6 className="flex items-center gap-1 text-lg font-medium text-dark-gray"> <StarFilledIcon /> {item.ticket}</h6>
+                            {/* <h6 className="flex items-center gap-1 text-lg font-medium text-dark-gray"> <TicketIcon /> {item.ticket}</h6> */}
+                            {/* <h6 className="flex items-center gap-1 text-lg font-medium text-dark-gray"> <StarFilledIcon /> {item.ticket}</h6> */}
                           </div>
                         </div>
                       </div>
@@ -252,7 +266,7 @@ const Home = () => {
         <div className="wraperDiv py-2">
           <div>
             <h3 className="text-4xl font-semibold">
-              Discover Best of Online Events
+              Trending Events around the World
             </h3>
           </div>
           <div>

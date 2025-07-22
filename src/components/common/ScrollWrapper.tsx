@@ -10,12 +10,21 @@ const LocoMotiveProvider = dynamic(() => import('@/app/providers/locomotive-prov
     ssr: false,
 })
 
-const excludedPaths = ['/login', '/auth', '/admin']
+const excludedPaths = ['/login', '/auth', '/admin',]
+const _excludedPaths = ['/create-event']
 
 const ScrollWrapper = ({ children }: { children: React.ReactNode }) => {
     const pathname = usePathname()
     const isExcluded = excludedPaths.includes(pathname)
+    const _isExcluded = _excludedPaths.includes(pathname)
     if (isExcluded) return <>{children}</>
+    if (_isExcluded) return (
+        <>
+            <Navbar />
+            {children}
+            <Footer />
+        </>
+    )
 
     return (
         <LocoMotiveProvider>
