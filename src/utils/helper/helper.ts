@@ -1,3 +1,4 @@
+import { EventTicket } from "@/lib/interfaces/HomeData.interface";
 import moment from "moment";
 
 export class Helper {
@@ -19,4 +20,26 @@ export class Helper {
         };
     };
 
+    static getStartToEndTime = (startTime: string, endTime: string): string => {
+        const formattedStart = moment(startTime, "HH:mm:ss").format("hh:mm A");
+        const formattedEnd = moment(endTime, "HH:mm:ss").format("hh:mm A");
+        return `${formattedStart} - ${formattedEnd}`;
+    };
+
+    static showBasePriceOrFree = (eventTickets: EventTicket[]) => {
+        return eventTickets.length ? eventTickets[0].price : 'Free'
+    }
+
+    static formateDate = (startDate: string, endDate: string) => {
+        const start = moment(startDate);
+        const end = moment(endDate);
+
+        const formatStr = 'dddd, D MMMM YYYY';
+
+        if (start.isSame(end, 'day')) {
+            return start.format(formatStr);
+        } else {
+            return `${start.format(formatStr)} - TO - ${end.format(formatStr)}`;
+        }
+    };
 }

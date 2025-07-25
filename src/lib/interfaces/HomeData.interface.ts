@@ -34,11 +34,23 @@ export interface LocationEvent {
     updatedAt: string
     deletedAt: any
     distance: number
+    interestedCount: number
     category: Category2
+    eventTickets: EventTicket[]
 }
 
 export interface Category2 {
     name: string
+}
+
+export interface EventTicket {
+    id: string
+    name: string
+    price: number
+    eventId: string
+    createdAt: string
+    updatedAt: string
+    deletedAt: any
 }
 
 export interface OnlineEvent {
@@ -60,6 +72,23 @@ export interface OnlineEvent {
     createdAt: string
     updatedAt: string
     deletedAt: any
+    interestedCount: number
+    category: Category3
+    eventTickets: EventTicket2[]
+}
+
+export interface Category3 {
+    name: string
+}
+
+export interface EventTicket2 {
+    id: string
+    name: string
+    price: number
+    eventId: string
+    createdAt: string
+    updatedAt: string
+    deletedAt: any
 }
 
 export interface TrendingEvent {
@@ -78,6 +107,23 @@ export interface TrendingEvent {
     isOnline: boolean
     hostedById: string
     categoryId: string
+    createdAt: string
+    updatedAt: string
+    deletedAt: any
+    interestedCount: number
+    category: Category4
+    eventTickets: EventTicket3[]
+}
+
+export interface Category4 {
+    name: string
+}
+
+export interface EventTicket3 {
+    id: string
+    name: string
+    price: number
+    eventId: string
     createdAt: string
     updatedAt: string
     deletedAt: any

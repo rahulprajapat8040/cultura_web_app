@@ -5,78 +5,15 @@ import { apiCall } from "./apiCall";
 import { HomeDataInterface } from "@/lib/interfaces/HomeData.interface";
 import Image from "next/image";
 import { Helper } from "@/utils/helper/helper";
+import EventCard from "@/components/event/EventCard";
+import Base_Url_UNI from "@/utils/BaseUrl";
 
 const Home = async () => {
-  const Base_Url = `${process.env.NEXT_PUBLIC_BASE_URL}`
+  const Base_Url = Base_Url_UNI;
   const res: HomeDataInterface = await apiCall(`${process.env.NEXT_PUBLIC_FETCH_HOME_DATA}`)
-  const categories = [
-    "entertainment",
-    "educational & business",
-    "cultural & arts",
-    "sports & fitness",
-    "technology & innovation",
-    "travel & adventure"
-  ]
 
   const options = [
     "all", "today", "tomorrow", "this weekend", "free"
-  ]
-
-  const popularEvents = [
-    {
-      name: 'Lakeside Camping at Pawna',
-      description: 'Adventure Geek - Explore the Unexplored, Mumbai',
-      time: '8:30 AM - 7:30 PM',
-      date: { month: 'Nov', day: '25 - 26' },
-      ticket: "1,400",
-      category: "Travel & Adventure",
-      intrested: 14
-    },
-    {
-      name: 'Lakeside Camping at Pawna',
-      description: 'Adventure Geek - Explore the Unexplored, Mumbai',
-      time: '8:30 AM - 7:30 PM',
-      date: { month: 'Nov', day: '25 - 26' },
-      ticket: "1,400",
-      category: "Travel & Adventure",
-      intrested: 14
-    },
-    {
-      name: 'Lakeside Camping at Pawna',
-      description: 'Adventure Geek - Explore the Unexplored, Mumbai',
-      time: '8:30 AM - 7:30 PM',
-      date: { month: 'Nov', day: '25 - 26' },
-      ticket: "1,400",
-      category: "Travel & Adventure",
-      intrested: 14
-    },
-    {
-      name: 'Lakeside Camping at Pawna',
-      description: 'Adventure Geek - Explore the Unexplored, Mumbai',
-      time: '8:30 AM - 7:30 PM',
-      date: { month: 'Nov', day: '25 - 26' },
-      ticket: "1,400",
-      category: "Travel & Adventure",
-      intrested: 14
-    },
-    {
-      name: 'Lakeside Camping at Pawna',
-      description: 'Adventure Geek - Explore the Unexplored, Mumbai',
-      time: '8:30 AM - 7:30 PM',
-      date: { month: 'Nov', day: '25 - 26' },
-      ticket: "1,400",
-      category: "Travel & Adventure",
-      intrested: 14
-    },
-    {
-      name: 'Lakeside Camping at Pawna',
-      description: 'Adventure Geek - Explore the Unexplored, Mumbai',
-      time: '8:30 AM - 7:30 PM',
-      date: { month: 'Nov', day: '25 - 26' },
-      ticket: "1,400",
-      category: "Travel & Adventure",
-      intrested: 14
-    },
   ]
 
   return (
@@ -92,6 +29,7 @@ const Home = async () => {
           <EventSearchInput />
         </div>
       </section>
+
       <section className="py-4">
         <div className="wraperDiv text-dark-blue-gray py-2">
           <div>
@@ -126,6 +64,7 @@ const Home = async () => {
           </div>
         </div>
       </section>
+
       <section className="py-4">
         <div className="wraperDiv py-2">
           <div>
@@ -152,40 +91,9 @@ const Home = async () => {
           <div>
             <ul className="grid grid-cols-3 gap-10 mt-5 py-3">
               {
-                res.locationEvents.map((item, idx) => {
-                  const date = Helper.getMonthAndDates(item.startDate, item.endDate)
+                res.locationEvents.map((item) => {
                   return (
-                    <li
-                      className="flex flex-col items-center justify-center gap-2"
-                      key={idx}
-                    >
-                      <div className="w-full h-64 bg-dark-gray relative rounded-t-lg">
-                        <div className="absolute capitalize bg-yellow px-3 py-1 text-dark-blue-gray font-semibold bottom-0 rounded-tr-md">
-                          {item.category.name}
-                        </div>
-                      </div>
-                      <div className="flex justify-between w-full gap-3">
-                        <div>
-                          <h5 className="text-[#4539B4] text-3xl font-medium">
-                            {date.month}
-                          </h5>
-                          <h5 className="font-bold">
-                            {date.date}
-                          </h5>
-                        </div>
-                        <div className="w-full space-y-0.5 ">
-                          <h3 className="font-medium text-lg line-clamp-1">{item.title}</h3>
-                          <p className="line-clamp-1">{item.description}</p>
-                          <span>
-                            {item.startTime}
-                          </span>
-                          <div className="flex items-center gap-3">
-                            {/* <h6 className="flex items-center gap-1 text-lg font-medium text-dark-gray"> <TicketIcon /> {item.ticket}</h6> */}
-                            {/* <h6 className="flex items-center gap-1 text-lg font-medium text-dark-gray"> <StarFilledIcon /> {item.ticket}</h6> */}
-                          </div>
-                        </div>
-                      </div>
-                    </li>
+                    <EventCard key={item.id} item={item} />
                   )
                 })
               }
@@ -194,6 +102,7 @@ const Home = async () => {
           <SeeMoreBtn />
         </div>
       </section>
+
       <section className="py-4">
         <div className="wraperDiv py-2">
           <div>
@@ -204,40 +113,11 @@ const Home = async () => {
           <div>
             <ul className="grid grid-cols-3 gap-10 mt-5 py-3">
               {
-                popularEvents.map((item, idx) => {
+                res.onlineEvents.map((item, idx) => {
+                  const date = Helper.getMonthAndDates(item.startDate, item.endDate)
+                  const time = Helper.getStartToEndTime(item.startTime, item.endTime)
                   return (
-                    <li
-                      className="flex flex-col items-center justify-center gap-2"
-                      key={idx}
-                    >
-                      <div className="w-full h-64 bg-dark-gray relative rounded-t-lg">
-                        <div className="absolute bg-yellow px-3 py-1 text-dark-blue-gray font-semibold bottom-0 rounded-tr-md">
-                          {item.category}
-                        </div>
-                      </div>
-                      <div className="flex justify-between w-full gap-3">
-                        <div>
-                          <h5 className="text-[#4539B4] text-3xl font-medium">
-                            {item.date.month}
-                          </h5>
-                          <h5 className="font-bold">
-                            {item.date.day}
-                          </h5>
-                        </div>
-                        <div className="w-full space-y-0.5">
-                          <h3 className="font-medium text-lg line-clamp-2">{item.name}</h3>
-                          <span>Online</span>
-                          <br />
-                          <span>
-                            {item.time}
-                          </span>
-                          <div className="flex items-center gap-3">
-                            <h6 className="flex items-center gap-1 text-lg font-medium text-dark-gray"> <TicketIcon /> {item.ticket}</h6>
-                            <h6 className="flex items-center gap-1 text-lg font-medium text-dark-gray"> <StarFilledIcon /> {item.intrested} intrested</h6>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
+                    <EventCard key={item.id} item={item} />
                   )
                 })
               }
@@ -246,6 +126,7 @@ const Home = async () => {
           <SeeMoreBtn />
         </div>
       </section>
+
       <section className="max-w-6xl PersonalizerRecomBg h-64 mx-auto my-8">
         <div className="flex flex-col w-3xl mx-auto justify-center h-full text-dark-blue-gray space-y-3">
           <h5 className="text-3xl font-semibold">Events specially curated for you!</h5>
@@ -272,40 +153,9 @@ const Home = async () => {
           <div>
             <ul className="grid grid-cols-3 gap-10 mt-5 py-3">
               {
-                popularEvents.map((item, idx) => {
+                res.trendingEvents.map((item) => {
                   return (
-                    <li
-                      className="flex flex-col items-center justify-center gap-2"
-                      key={idx}
-                    >
-                      <div className="w-full h-64 bg-dark-gray relative rounded-t-lg">
-                        <div className="absolute bg-yellow px-3 py-1 text-dark-blue-gray font-semibold bottom-0 rounded-tr-md">
-                          {item.category}
-                        </div>
-                      </div>
-                      <div className="flex justify-between w-full gap-3">
-                        <div>
-                          <h5 className="text-[#4539B4] text-3xl font-medium">
-                            {item.date.month}
-                          </h5>
-                          <h5 className="font-bold">
-                            {item.date.day}
-                          </h5>
-                        </div>
-                        <div className="w-full space-y-0.5">
-                          <h3 className="font-medium text-lg line-clamp-2">{item.name}</h3>
-                          <span>Online</span>
-                          <br />
-                          <span>
-                            {item.time}
-                          </span>
-                          <div className="flex items-center gap-3">
-                            <h6 className="flex items-center gap-1 text-lg font-medium text-dark-gray"> <TicketIcon /> {item.ticket}</h6>
-                            <h6 className="flex items-center gap-1 text-lg font-medium text-dark-gray"> <StarFilledIcon /> {item.intrested} intrested</h6>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
+                    <EventCard key={item.id} item={item} />
                   )
                 })
               }
@@ -314,6 +164,7 @@ const Home = async () => {
           <SeeMoreBtn />
         </div>
       </section>
+
       <section className="Create_Event_CTA h-64 mx-auto my-8">
         <div className="flex flex-col w-3xl mx-auto justify-center h-full text-yellow space-y-3">
           <h5 className="text-3xl font-semibold">Create an event with Eventify</h5>

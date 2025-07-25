@@ -1,4 +1,4 @@
-module: create event page
-features: created create event page added api
-description: created create event page
-author: Rahu Prajapat, JULY 22, 11:26 am
+module: event detail page + event list page
+features: list the events and filter, event detail
+description: created pages for the event detail and event listing with the filter and pagination
+author: Rahu Prajapat, JULY 25, 02:15 pm

@@ -3,6 +3,10 @@
 
 @custom-variant dark (&:is(.dark *));
 
+* {
+  scroll-behavior: smooth;
+}
+
 :root {
   --yellow: #ffe047;
   --darkGray: #5a5a5a;
